@@ -12,14 +12,14 @@ export interface Qa3daCardProps {
 export default function Qa3daCard({
   id,
   text,
-  badgeLabel = "الموضوع",
+  badgeLabel = "موضوع",
   category,
 }: Qa3daCardProps) {
-  const cardId = id.padStart(2, "0")
+  console.log(category)
 
   return (
     <div
-      className="relative flex min-h-[340px] w-full items-center justify-center p-4"
+      className="relative flex min-h-85 w-full items-center justify-center p-4"
       style={{ perspective: "1000px" }}
     >
       <AnimatePresence mode="wait">
@@ -44,22 +44,16 @@ export default function Qa3daCard({
           />
 
           {/* Inner Border */}
-          <div className="pointer-events-none absolute inset-3.5 rounded-sm border-2 border-ink/80" />
-
-          {/* Corner IDs */}
-          <span className="card-corner-id top-5 right-5">{cardId}</span>
-          <span className="card-corner-id bottom-5 left-5 rotate-180">
-            {cardId}
-          </span>
+          <div className="pointer-events-none absolute inset-3.5 rounded-sm border-2 border-ink-soft/80" />
 
           {/* Top Badge */}
           <div className="badge-container">
             <div className="mb-1 text-[10px] tracking-widest text-danger-brand">
-              ✦ ❖ ✦
+              ✦✦ ❖ ✦✦
             </div>
             <div className="badge-pill">
               <span className="text-[10px] font-black tracking-wider text-danger-brand uppercase">
-                {badgeLabel} {category ? `· ${category}` : ""}
+                {category}
               </span>
             </div>
           </div>
@@ -73,10 +67,11 @@ export default function Qa3daCard({
 
           {/* Footer Divider */}
           <div className="relative z-10 mt-6 flex flex-col items-center gap-1">
+            <span className="text-xs text-ink-glow/75">{badgeLabel}</span>
             <div className="card-divider">
-              <span>──</span>
+              <span>──────</span>
               <span>❖</span>
-              <span>──</span>
+              <span>──────</span>
             </div>
           </div>
         </motion.div>

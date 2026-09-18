@@ -176,11 +176,11 @@
 }
 
 @utility qa3da-card {
-  @apply relative flex w-full max-w-lg select-none flex-col items-center justify-between overflow-hidden rounded-lg border-[3px] border-ink bg-paper-warm p-6 text-center shadow-[8px_8px_0px_0px_var(--color-ink)] md:p-8;
+  @apply relative flex min-h-88 w-full max-w-lg select-none flex-col items-center justify-between overflow-hidden rounded-lg border-[3px] border-ink bg-paper-warm p-6 text-center shadow-[8px_8px_0px_0px_var(--color-ink)] md:p-8;
 }
 
 @utility card-corner-id {
-  @apply absolute font-mono text-base font-bold leading-none text-danger-brand;
+  @apply absolute font-mono text-base font-bold leading-none text-ink-glow;
 }
 
 @utility badge-container {

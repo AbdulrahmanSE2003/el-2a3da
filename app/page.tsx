@@ -77,7 +77,7 @@ export default function HomePage() {
         {/* Secondary Activities */}
         <section className="mt-5 grid grid-cols-2 gap-3">
           {activities.slice(1).map((item) => (
-            <ActivityCard item={item} />
+            <ActivityCard item={item} key={item.number} />
           ))}
         </section>
       </div>
