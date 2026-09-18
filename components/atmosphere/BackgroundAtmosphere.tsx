@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function BackgroundAtmosphere() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-20 select-none">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-paper opacity-20 select-none">
       {/* 1. ورقة كوتشينة - أعلى اليمين */}
       <motion.div
         initial={{ rotate: -12, y: 0 }}

@@ -1,4 +1,3 @@
-// components/QadaCard.tsx
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
@@ -13,12 +12,14 @@ export interface Qa3daCardProps {
 export default function Qa3daCard({
   id,
   text,
-  badgeLabel = "TOPIC",
+  badgeLabel = "الموضوع",
   category,
 }: Qa3daCardProps) {
+  const cardId = id.padStart(2, "0")
+
   return (
     <div
-      className="relative flex min-h-[280px] w-full items-center justify-center"
+      className="relative flex min-h-[340px] w-full items-center justify-center p-4"
       style={{ perspective: "1000px" }}
     >
       <AnimatePresence mode="wait">
@@ -27,40 +28,57 @@ export default function Qa3daCard({
           initial={{ rotateY: -90, opacity: 0, scale: 0.95 }}
           animate={{ rotateY: 0, opacity: 1, scale: 1 }}
           exit={{ rotateY: 90, opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.28, ease: "easeInOut" }}
-          className="relative flex w-full flex-col items-center justify-between overflow-hidden rounded-sm border-2 border-ink bg-paper-warm p-6 text-center shadow-[6px_6px_0px_0px_var(--color-ink)] md:p-8"
+          transition={{ duration: 0.32, ease: "easeInOut" }}
+          className="qa3da-card"
         >
-          {/* Subtle Watermark Pattern Inside Card */}
+          {/* Subtle Pattern */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.04]"
+            className="pointer-events-none absolute inset-0 opacity-6 mix-blend-multiply"
             style={{
-              backgroundImage:
-                "radial-gradient(var(--color-ink) 1px, transparent 1px)",
-              backgroundSize: "12px 12px",
+              backgroundImage: `
+                radial-gradient(var(--color-ink) 1px, transparent 1px),
+                repeating-linear-gradient(45deg, var(--color-ink) 0, var(--color-ink) 1px, transparent 0, transparent 50%)
+              `,
+              backgroundSize: "16px 16px, 20px 20px",
             }}
           />
 
+          {/* Inner Border */}
+          <div className="pointer-events-none absolute inset-3.5 rounded-sm border-2 border-ink/80" />
+
+          {/* Corner IDs */}
+          <span className="card-corner-id top-5 right-5">{cardId}</span>
+          <span className="card-corner-id bottom-5 left-5 rotate-180">
+            {cardId}
+          </span>
+
           {/* Top Badge */}
-          <div className="mb-4 flex items-center gap-2 border-b border-copper/30 pb-2">
-            <span className="font-mono text-xs font-bold tracking-widest text-copper uppercase">
-              {badgeLabel} &middot; {id}
-            </span>
-            {category && (
-              <span className="font-sans text-xs font-semibold text-ink-soft/80">
-                ({category})
+          <div className="badge-container">
+            <div className="mb-1 text-[10px] tracking-widest text-danger-brand">
+              ✦ ❖ ✦
+            </div>
+            <div className="badge-pill">
+              <span className="text-[10px] font-black tracking-wider text-danger-brand uppercase">
+                {badgeLabel} {category ? `· ${category}` : ""}
               </span>
-            )}
+            </div>
           </div>
 
-          {/* Card Main Text */}
-          <p className="my-auto py-2 text-2xl leading-relaxed font-black text-ink-glow md:text-3xl">
-            " <span className="text-ink">{text}</span> "
-          </p>
+          {/* Main Text */}
+          <div className="relative z-10 my-auto py-2">
+            <p className="text-xl leading-loose font-extrabold tracking-tight text-ink md:text-[28px]">
+              {text}
+            </p>
+          </div>
 
-          {/* Card Footer Identifier */}
-          <span className="mt-4 font-mono text-[10px] text-ink-soft/40 uppercase">
-            القعدة — EL-Qa3DA
-          </span>
+          {/* Footer Divider */}
+          <div className="relative z-10 mt-6 flex flex-col items-center gap-1">
+            <div className="card-divider">
+              <span>──</span>
+              <span>❖</span>
+              <span>──</span>
+            </div>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>

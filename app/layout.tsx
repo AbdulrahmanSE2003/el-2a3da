@@ -36,7 +36,7 @@ export default function RootLayout({
         ibmPlexMono.variable
       )}
     >
-      <body className="dir-rtl min-h-screen bg-background font-sans text-foreground">
+      <body className="min-h-screen bg-paper font-sans text-foreground">
         {children}
       </body>
     </html>
