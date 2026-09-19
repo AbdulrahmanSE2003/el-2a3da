@@ -8,40 +8,70 @@ export interface ActivityCardItem {
   stamp: string
   title: string
   description: string
+  className?: string
+  variant?: "default" | "dark"
 }
 
 export interface ActivityCardProps {
   item: ActivityCardItem
   className?: string
   showWatermark?: boolean
+  variant?: "default" | "dark"
 }
 
 export function ActivityCard({
   item,
   className = "",
   showWatermark = false,
+  variant = "default",
 }: ActivityCardProps) {
   const Icon = item.icon
+  const activeVariant = variant || item.variant || "default"
+  const isDark = activeVariant === "dark"
+  const activeClassName = className || item.className || ""
 
   return (
-    <Link href={item.href} className={`group card-brutal ${className}`}>
-      {showWatermark && <span className="watermark-num">{item.number}</span>}
+    <Link
+      href={item.href}
+      className={`group card-brutal ${
+        isDark
+          ? "border-paper-warm/30 bg-ink text-paper shadow-[3px_3px_0_var(--color-paper-warm)] hover:shadow-[5px_5px_0_var(--color-paper-warm)]"
+          : ""
+      } ${activeClassName}`}
+    >
+      {showWatermark && (
+        <span className={`watermark-num ${isDark ? "text-paper/[0.05]" : ""}`}>
+          {item.number}
+        </span>
+      )}
 
       <div className="relative flex items-start justify-between">
-        <div className="icon-box">
+        <div
+          className={`icon-box ${
+            isDark ? "border-paper/20 bg-ink-soft text-paper" : ""
+          }`}
+        >
           <Icon className="size-4" strokeWidth={1.8} />
         </div>
-        <span className="stamp-text">{item.number}</span>
+        <span className={`stamp-text ${isDark ? "text-copper" : ""}`}>
+          {item.number}
+        </span>
       </div>
 
       <div className="relative">
-        <span className="stamp-text">{item.stamp}</span>
+        <span className={`stamp-text ${isDark ? "text-copper" : ""}`}>
+          {item.stamp}
+        </span>
         <h3 className="mt-1.5 text-xl leading-none font-black tracking-tight">
           {item.title}
         </h3>
 
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-[11px] font-semibold text-ink-soft/65">
+          <p
+            className={`text-[11px] font-semibold ${
+              isDark ? "text-paper/70" : "text-ink-soft/65"
+            }`}
+          >
             {item.description}
           </p>
           <ArrowUpLeft className="arrow-hover" />

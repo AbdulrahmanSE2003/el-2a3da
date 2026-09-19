@@ -12,25 +12,20 @@ import {
 import GridPattern from "@/components/atmosphere/GridPattern"
 import BackgroundAtmosphere from "@/components/atmosphere/BackgroundAtmosphere"
 import Header from "@/features/home/components/Header"
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { ActivityCard } from "@/components/layout/ActivityCard"
 
-const activities = [
+import {
+  ActivityCard,
+  ActivityCardItem,
+} from "@/components/layout/ActivityCard"
+
+export const activities: ActivityCardItem[] = [
   {
     number: "01",
     stamp: "TOPICS",
-    title: "مواضيع وحوار",
+    title: "مواضيع وحوارات",
     description: "سؤال يفتح الكلام... والباقي على القعدة.",
     href: "/topics",
     icon: MessageCircle,
-    featured: true,
   },
   {
     number: "02",
@@ -42,11 +37,21 @@ const activities = [
   },
   {
     number: "03",
+    stamp: "QUESTIONS",
+    title: "أسألة واعترافات",
+    description: "جاهز للإستجواب؟",
+    href: "/sheikh",
+    icon: Gamepad2,
+  },
+  {
+    number: "04",
     stamp: "GAMES",
     title: "ألعاب",
-    description: "القعدة هتبدأ بجد.",
+    description: "هنا القعدة هتبدأ بجد.",
     href: "/games",
     icon: Gamepad2,
+    className: "col-span-2",
+    variant: "dark",
   },
 ]
 
@@ -77,7 +82,12 @@ export default function HomePage() {
         {/* Secondary Activities */}
         <section className="mt-5 grid grid-cols-2 gap-3">
           {activities.slice(1).map((item) => (
-            <ActivityCard item={item} key={item.number} />
+            <ActivityCard
+              item={item}
+              key={item.number}
+              className={item?.className ?? ""}
+              variant={item?.variant ?? "default"}
+            />
           ))}
         </section>
       </div>
